@@ -5,7 +5,7 @@ import { CustomLogger } from 'src/custom-logger/custom-logger.service';
 import { HttpRestService } from 'src/http-rest/http-rest.service';
 import { JwtTokenService } from 'src/jwt/jwt.service';
 import { UtilsService } from 'src/utils/utils.service';
-import { LoginDataDto } from './dto/login.dto';
+import { LoginDataDto, LoginResponseDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -27,21 +27,24 @@ export class AuthService {
         token: credentialToken,
       });
       const data = response.data;
-      const user = data?.user;
 
       if (!response.success || !response.data) {
         throw new NotFoundException(response.message);
       } else {
         const payload = {
           user: {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-            isAdmin: user.type === 'ADMIN' ? true : false,
+            id: data.id,
+            email: data.email,
+            name: data.name,
+            isAdmin: data.type === 'ADMIN' ? true : false,
           },
         };
-        const token = this.jwtService.sign(payload);
-        return { token };
+        const token = await this.jwtService.sign(payload);
+        return {
+          data: {
+            accessToken: token,
+          },
+        };
       }
     } catch (error) {
       this.logger.error(error);

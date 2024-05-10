@@ -37,7 +37,7 @@ export class JwtTokenService {
         }),
       ]);
 
-      return { accessToken, refreshToken };
+      return { accessToken };
     } catch (err) {
       this.logger.error(err);
       throw err;

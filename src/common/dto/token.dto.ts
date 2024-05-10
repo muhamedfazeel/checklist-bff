@@ -4,6 +4,6 @@ export class TokenDto {
   @ApiProperty()
   accessToken: string;
 
-  @ApiProperty()
-  refreshToken: string;
+  // @ApiProperty()
+  // refreshToken: string;
 }
