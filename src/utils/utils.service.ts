@@ -153,6 +153,6 @@ export class UtilsService {
   getMainApiUrl() {
     const url = this.config.mainApi.url;
     const version = this.config.mainApi.version;
-    return `${url}/v${version}`;
+    return `${url}/api/v${version}`;
   }
 }
