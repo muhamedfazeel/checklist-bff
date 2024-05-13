@@ -5,7 +5,7 @@ import { CustomLogger } from 'src/custom-logger/custom-logger.service';
 import { HttpRestService } from 'src/http-rest/http-rest.service';
 import { JwtTokenService } from 'src/jwt/jwt.service';
 import { UtilsService } from 'src/utils/utils.service';
-import { LoginDataDto, LoginResponseDto } from './dto/login.dto';
+import { LoginDataDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -41,9 +41,7 @@ export class AuthService {
         };
         const token = await this.jwtService.sign(payload);
         return {
-          data: {
-            accessToken: token,
-          },
+          data: token,
         };
       }
     } catch (error) {
