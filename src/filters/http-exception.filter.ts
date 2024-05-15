@@ -63,10 +63,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : exception.response?.status || HttpStatus.FORBIDDEN;
 
-    if (exception.response?.statusCode) {
-      msg = exception.response.message;
-      resError = exception.response;
-    } else if (exception.response?.code) {
+    if (exception.response?.statusCode || exception.response?.code) {
       msg = exception.response.message;
       resError = exception.response;
     } else if (exception.response?.data?.statusCode) {
